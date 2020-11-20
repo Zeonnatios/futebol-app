@@ -39,15 +39,16 @@
             </div>
           </div>
 
-
-          <button class="btn waves-effect waves-light" type="submit" name="action"><i
-              class="material-icons right">save</i>Adicionar Partida</button>
-
+          <button class="btn waves-effect " type="submit" name="action"><i
+              class="material-icons right">save</i>Adicionar
+            Partida</button>
         </form>
-
       </div>
-      <h4>Tabela Brasileirão</h4>
 
+      <h4>Tabela Brasileirão - 
+        <a class="waves-effect btn modal-trigger" href="#modal-partidas">Visualizar Resultados</a>
+      </h4>
+      <!-- Modal Trigger -->
 
       <table>
         <thead>
@@ -77,6 +78,36 @@
         </tbody>
       </table>
     </div>
+
+    <!-- Modal Structure -->
+    <div id="modal-partidas" class="modal">
+      <div class="modal-content">
+        <table>
+          <thead>
+            <tr>
+              <th>Time da Casa</th>
+              <th>Gols da Casa</th>
+              <th>Time Visitante</th>
+              <th>Gols do Visitante</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="partida of partidas" :key="partida.id">
+              <td>{{ partida.nome_time_casa }}</td>
+              <td>{{ partida.gols_time_casa }}</td>
+              <td>{{ partida.nome_time_visitante }}</td>
+              <td>{{ partida.gols_time_visitante }}</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -92,30 +123,41 @@
           gols_time_casa: '',
           gols_time_visitante: '',
         },
-        times: []
+        times: [],
+        partidas: []
       }
     },
 
     mounted() {
       this.listar()
+      this.listarPartidas();
     },
 
     methods: {
 
-      listar(){
+
+
+      listar() {
         Time.listar().then(r => {
-        this.times = r.data;
-      })
-    },
+          this.times = r.data;
+        })
+      },
 
       salvar() {
         Time.salvar(this.time).then(resp => {
-          this.resp = resp;
-          alert('Partida adicionada com sucesso!')
-          this.listar()
-        }),
-        Time.atualizar(this.time).then(resp => {
-          this.resp = resp;
+            this.resp = resp;
+            alert('Partida adicionada com sucesso!')
+          }),
+          Time.atualizar(this.time).then(resp => {
+            this.resp = resp;
+            this.listar()
+            this.listarPartidas();
+          })
+      },
+
+      listarPartidas() {
+        Time.listarPartidas().then(r => {
+          this.partidas = r.data;
         })
       }
     }

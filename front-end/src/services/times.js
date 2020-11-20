@@ -11,5 +11,10 @@ export default {
 
     atualizar:(time)=>{
 		return http.put('times', time);
+    },
+
+    listarPartidas: () =>{
+        return http.get('partidas')
     }
+        
 }
