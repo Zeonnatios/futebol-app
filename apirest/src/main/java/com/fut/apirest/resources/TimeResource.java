@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fut.apirest.models.Partidas;
@@ -47,16 +48,56 @@ public class TimeResource {
 	@PostMapping("/partidas")
 	@ApiOperation(value="Retorna uma lista de partidas.")
 	public Partidas adicionarPartida(@RequestBody Partidas partida){
+		
 		return partidaRepo.save(partida);
 	}
 	
 	@PutMapping("/times")
 	@ApiOperation(value="Atualiza a quantidade de gols e partidas do time.")
-	public Time atualizaTime(@RequestBody Time time) {
-		Time t = new Time();
-		t = timeRepo.findByNome(time.getNome());
-		time.setId(t.getId());
-		return timeRepo.save(time);
+	/*public Time atualizaTime(@RequestParam(value = "casa") String casa,
+			@RequestParam(value = "visitante") String visitante,
+			@RequestParam(value = "golcasa") int golcasa,
+			@RequestParam(value = "golvisitante") int golvisitante) {
+		*/
+	public Time atualizaTime(@RequestBody Partidas partida) {
+		
+		Time tc = new Time();
+		Time tv = new Time();
+		
+		tc = timeRepo.findByNome(partida.getNome_time_casa());
+		tv = timeRepo.findByNome(partida.getNome_time_visitante());
+		
+		int golcasa = partida.getGols_time_casa();
+		int golvisitante = partida.getGols_time_visitante();
+		int pontocasa = tc.getPontos();
+		int pontoVisitante = tv.getPontos();
+		
+		tc.setGols(tc.getGols() + golcasa);
+		tv.setGols(tv.getGols() + golvisitante);
+		
+		if(golcasa == golvisitante) {
+			
+			tc.setEmpates(tc.getEmpates() + 1);
+			tv.setEmpates(tc.getEmpates() + 1);
+			tc.setPontos(pontocasa + 1);
+			tv.setPontos(pontoVisitante + 1);
+			
+		}else if(golcasa > golvisitante) {
+			
+			tc.setVitorias(tc.getVitorias() + 1); 
+			tv.setDerrotas(tv.getDerrotas() + 1);
+			tc.setPontos(pontocasa + 3);
+			
+		}else{
+			
+			tv.setVitorias(tv.getVitorias() + 1); 
+			tc.setDerrotas(tc.getDerrotas() + 1);
+			tv.setPontos(pontoVisitante + 3);
+		}
+		
+		timeRepo.save(tc);
+		
+		return timeRepo.save(tv);
 	}
 		
 }

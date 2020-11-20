@@ -8,7 +8,7 @@
           <div class="row">
 
             <div class="input-field col s6">
-              <select v-model="time.nome_time_casa">
+              <select name="casa" v-model="time.nome_time_casa">
                 <option value="" disabled selected>Escolha seu time</option>
                 <option v-for="time of times" :key="time.id">
                   {{time.nome}}
@@ -18,7 +18,7 @@
             </div>
 
             <div class="input-field col s6">
-              <select v-model="time.nome_time_visitante">
+              <select name="visitante" v-model="time.nome_time_visitante">
                 <option value="" disabled selected>Escolha seu time</option>
                 <option v-for="time of times" :key="time.id">
                   {{time.nome}}
@@ -30,18 +30,18 @@
 
           <div class="row">
             <div class="input-field col s6">
-              <input type="text" v-model="time.gols_time_casa" class="validate">
+              <input name="golcasa" type="text" v-model="time.gols_time_casa" class="validate">
               <label>Gols do Time da Casa</label>
             </div>
             <div class="input-field col s6">
-              <input type="text" v-model="time.gols_time_visitante" class="validate">
+              <input name="golsivitante" type="text" v-model="time.gols_time_visitante" class="validate">
               <label>Gols do Time Visitante</label>
             </div>
           </div>
 
-          
-        <button class="btn waves-effect waves-light" type="submit" name="action"><i
-            class="material-icons right">save</i>Adicionar Partida</button>
+
+          <button class="btn waves-effect waves-light" type="submit" name="action"><i
+              class="material-icons right">save</i>Adicionar Partida</button>
 
         </form>
 
@@ -57,6 +57,7 @@
             <th>Gols</th>
             <th>Partidas Disputadas</th>
             <th>Vitórias</th>
+            <th>Empates</th>
             <th>Derrotas</th>
           </tr>
         </thead>
@@ -69,6 +70,7 @@
             <td>{{ time.gols }}</td>
             <td>{{ time.partidas }}</td>
             <td>{{ time.vitorias }}</td>
+            <td>{{ time.empates }}</td>
             <td>{{ time.derrotas }}</td>
           </tr>
 
@@ -95,18 +97,27 @@
     },
 
     mounted() {
-      Time.listar().then(r => {
-        console.log(r.data)
+      this.listar()
+    },
+
+    methods: {
+
+      listar(){
+        Time.listar().then(r => {
         this.times = r.data;
       })
     },
 
-    methods:{
-        salvar(){
-            Time.salvar(this.time).then(resp => {
-              this.resp = resp;
-            })
-        }
+      salvar() {
+        Time.salvar(this.time).then(resp => {
+          this.resp = resp;
+          alert('Partida adicionada com sucesso!')
+          this.listar()
+        }),
+        Time.atualizar(this.time).then(resp => {
+          this.resp = resp;
+        })
+      }
     }
 
   }

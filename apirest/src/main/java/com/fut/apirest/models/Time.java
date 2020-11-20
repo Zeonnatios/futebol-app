@@ -30,13 +30,16 @@ public class Time implements Serializable {
 	private int gols;
 	
 	@Column(name = "pontos")
-	private long pontos;
+	private int pontos;
 	
 	@Column(name = "partidas")
 	private int partidas;
 
 	@Column(name = "vitorias")
 	private int vitorias;
+	
+	@Column(name = "empates")
+	private int empates;
 	
 	@Column(name = "derrotas")
 	private int derrotas;
@@ -73,11 +76,11 @@ public class Time implements Serializable {
 		this.partidas = partidas;
 	}
 
-	public long getPontos() {
+	public int getPontos() {
 		return pontos;
 	}
 
-	public void setPontos(long pontos) {
+	public void setPontos(int pontos) {
 		this.pontos = pontos;
 	}
 
@@ -87,6 +90,14 @@ public class Time implements Serializable {
 
 	public void setVitorias(int vitorias) {
 		this.vitorias = vitorias;
+	}
+	
+	public int getEmpates() {
+		return empates;
+	}
+
+	public void setEmpates(int empates) {
+		this.empates = empates;
 	}
 
 	public int getDerrotas() {
