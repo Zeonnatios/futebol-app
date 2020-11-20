@@ -29,11 +29,11 @@
 
           <div class="row">
             <div class="input-field col s6">
-              <input type="text" name="golscasa" class="validate">
+              <input type="text" name="gols_casa" class="validate">
               <label>Gols do Time da Casa</label>
             </div>
             <div class="input-field col s6">
-              <input type="text" name="golsvisitante" class="validate">
+              <input type="text" name="gols_visitante" class="validate">
               <label>Gols do Time Visitante</label>
             </div>
           </div>
