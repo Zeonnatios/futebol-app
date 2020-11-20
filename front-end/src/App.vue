@@ -5,13 +5,25 @@
       <div class="row">
         <form class="col s12">
           <div class="row">
+
             <div class="input-field col s6">
-              <input id="icon_prefix" type="text" name="casa" class="validate">
-              <label for="icon_prefix">Time da Casa</label>
+              <select name="casa">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <label>Time da Casa</label>
             </div>
+
             <div class="input-field col s6">
-              <input id="icon_telephone" type="text" name="visitante" class="validate">
-              <label for="icon_telephone">Time Visitante</label>
+              <select name="visitante">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <label>Time Visitante</label>
             </div>
           </div>
 
@@ -27,7 +39,8 @@
           </div>
         </form>
 
-        <button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>Adicionar Partida</button>
+        <button class="btn waves-effect waves-light" type="submit" name="action"><i
+            class="material-icons right">save</i>Adicionar Partida</button>
       </div>
       <h4>Tabela Brasileirão</h4>
 
