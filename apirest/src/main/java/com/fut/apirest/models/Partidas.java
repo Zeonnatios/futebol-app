@@ -17,13 +17,7 @@ public class Partidas implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private long id;
-	
-	@Column(name = "id_time_casa")
-	private int id_time_casa;
-	
-	@Column(name = "id_time_visitante")
-	private int id_time_visitante;
-	
+		
 	@Column(name = "time_casa")
 	private String nome_time_casa;
 	
@@ -42,22 +36,6 @@ public class Partidas implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public int getId_time_casa() {
-		return id_time_casa;
-	}
-
-	public void setId_time_casa(int id_time_casa) {
-		this.id_time_casa = id_time_casa;
-	}
-
-	public int getId_time_visitante() {
-		return id_time_visitante;
-	}
-
-	public void setId_time_visitante(int id_time_visitante) {
-		this.id_time_visitante = id_time_visitante;
 	}
 
 	public String getNome_time_casa() {

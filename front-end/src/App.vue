@@ -3,11 +3,12 @@
     <div class="container">
       <h3 class="center-align">Futebol-app using Vue.js and Axios</h3>
       <div class="row">
-        <form class="col s12">
+
+        <form class="col s12" @submit.prevent="salvar">
           <div class="row">
 
             <div class="input-field col s6">
-              <select name="nome_time_casa">
+              <select v-model="time.nome_time_casa">
                 <option value="" disabled selected>Escolha seu time</option>
                 <option v-for="time of times" :key="time.id">
                   {{time.nome}}
@@ -17,7 +18,7 @@
             </div>
 
             <div class="input-field col s6">
-              <select name="nome_time_visitante">
+              <select v-model="time.nome_time_visitante">
                 <option value="" disabled selected>Escolha seu time</option>
                 <option v-for="time of times" :key="time.id">
                   {{time.nome}}
@@ -29,18 +30,21 @@
 
           <div class="row">
             <div class="input-field col s6">
-              <input type="text" name="gols_casa" class="validate">
+              <input type="text" v-model="time.gols_time_casa" class="validate">
               <label>Gols do Time da Casa</label>
             </div>
             <div class="input-field col s6">
-              <input type="text" name="gols_visitante" class="validate">
+              <input type="text" v-model="time.gols_time_visitante" class="validate">
               <label>Gols do Time Visitante</label>
             </div>
           </div>
-        </form>
 
+          
         <button class="btn waves-effect waves-light" type="submit" name="action"><i
             class="material-icons right">save</i>Adicionar Partida</button>
+
+        </form>
+
       </div>
       <h4>Tabela Brasileirão</h4>
 
@@ -74,14 +78,18 @@
   </div>
 </template>
 
-
 <script>
   import Time from './services/times'
-
   export default {
 
     data() {
       return {
+        time: {
+          nome_time_casa: '',
+          nome_time_visitante: '',
+          gols_time_casa: '',
+          gols_time_visitante: '',
+        },
         times: []
       }
     },
@@ -91,7 +99,16 @@
         console.log(r.data)
         this.times = r.data;
       })
+    },
+
+    methods:{
+        salvar(){
+            Time.salvar(this.time).then(resp => {
+              this.resp = resp;
+            })
+        }
     }
+
   }
 </script>
 
