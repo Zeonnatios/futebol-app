@@ -55,7 +55,7 @@
             <th>Times</th>
             <th>Pontos</th>
             <th>Gols</th>
-            <th>Partidas Disputadas</th>
+            <th>Partidas</th>
             <th>Vitórias</th>
             <th>Empates</th>
             <th>Derrotas</th>

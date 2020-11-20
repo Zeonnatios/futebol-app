@@ -63,7 +63,7 @@ public class TimeResource {
 		
 		Time tc = new Time();
 		Time tv = new Time();
-		
+	
 		tc = timeRepo.findByNome(partida.getNome_time_casa());
 		tv = timeRepo.findByNome(partida.getNome_time_visitante());
 		
@@ -71,14 +71,18 @@ public class TimeResource {
 		int golvisitante = partida.getGols_time_visitante();
 		int pontocasa = tc.getPontos();
 		int pontoVisitante = tv.getPontos();
+		int qtdePartidaCasa = tc.getPartidas();
+		int qtdePartidaVisitante = tv.getPartidas();
 		
+		tc.setPartidas(1 + qtdePartidaCasa);
+		tv.setPartidas(1 + qtdePartidaVisitante);
 		tc.setGols(tc.getGols() + golcasa);
 		tv.setGols(tv.getGols() + golvisitante);
 		
 		if(golcasa == golvisitante) {
 			
 			tc.setEmpates(tc.getEmpates() + 1);
-			tv.setEmpates(tc.getEmpates() + 1);
+			tv.setEmpates(tv.getEmpates() + 1);
 			tc.setPontos(pontocasa + 1);
 			tv.setPontos(pontoVisitante + 1);
 			
