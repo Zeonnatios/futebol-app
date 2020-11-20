@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fut.apirest.models.Partidas;
 import com.fut.apirest.models.Time;
+import com.fut.apirest.repository.PartidaRepository;
 import com.fut.apirest.repository.TimeRepository;
 
 import io.swagger.annotations.Api;
@@ -25,11 +28,19 @@ public class TimeResource {
 	@Autowired
 	TimeRepository timeRepo;
 	
+	@Autowired
+	PartidaRepository partidaRepo;
+	
 	@GetMapping("/times")
-	@ApiOperation(value="Retorna uma lista de times.")
+	@ApiOperation(value="Retorna uma lista de times oedenada por pontos feitos (desc).")
 	public List<Time> listarTimes(){
-		
-		return timeRepo.findAll();
+		return timeRepo.findAllOrderByPontos();
+	}
+	
+	@GetMapping("/partidas")
+	@ApiOperation(value="Retorna uma lista de partidas.")
+	public List<Partidas> listarPartidas(){
+		return partidaRepo.findAll();
 	}
 	
 	@PutMapping("/times")

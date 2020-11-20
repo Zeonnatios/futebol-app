@@ -7,21 +7,21 @@
           <div class="row">
 
             <div class="input-field col s6">
-              <select name="casa">
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+              <select name="nome_time_casa">
+                <option value="" disabled selected>Escolha seu time</option>
+                <option v-for="time of times" :key="time.id">
+                  {{time.nome}}
+                </option>
               </select>
               <label>Time da Casa</label>
             </div>
 
             <div class="input-field col s6">
-              <select name="visitante">
-                <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+              <select name="nome_time_visitante">
+                <option value="" disabled selected>Escolha seu time</option>
+                <option v-for="time of times" :key="time.id">
+                  {{time.nome}}
+                </option>
               </select>
               <label>Time Visitante</label>
             </div>
@@ -29,12 +29,12 @@
 
           <div class="row">
             <div class="input-field col s6">
-              <input id="icon_prefix" type="text" name="golscasa" class="validate">
-              <label for="icon_prefix">Gols do Time da Casa</label>
+              <input type="text" name="golscasa" class="validate">
+              <label>Gols do Time da Casa</label>
             </div>
             <div class="input-field col s6">
-              <input id="icon_telephone" type="text" name="golsvisitante" class="validate">
-              <label for="icon_telephone">Gols do Time Visitante</label>
+              <input type="text" name="golsvisitante" class="validate">
+              <label>Gols do Time Visitante</label>
             </div>
           </div>
         </form>
@@ -49,17 +49,25 @@
         <thead>
           <tr>
             <th>Times</th>
-            <th>Partidas Jogadas</th>
+            <th>Pontos</th>
             <th>Gols</th>
+            <th>Partidas Disputadas</th>
+            <th>Vitórias</th>
+            <th>Derrotas</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>Corinthians</td>
-            <td>18</td>
-            <td>9</td>
+
+          <tr v-for="time of times" :key="time.id">
+            <td>{{ time.nome }}</td>
+            <td>{{ time.pontos }}</td>
+            <td>{{ time.gols }}</td>
+            <td>{{ time.partidas }}</td>
+            <td>{{ time.vitorias }}</td>
+            <td>{{ time.derrotas }}</td>
           </tr>
+
         </tbody>
       </table>
     </div>
@@ -68,7 +76,23 @@
 
 
 <script>
+  import Time from './services/times'
 
+  export default {
+
+    data() {
+      return {
+        times: []
+      }
+    },
+
+    mounted() {
+      Time.listar().then(r => {
+        console.log(r.data)
+        this.times = r.data;
+      })
+    }
+  }
 </script>
 
 <style>

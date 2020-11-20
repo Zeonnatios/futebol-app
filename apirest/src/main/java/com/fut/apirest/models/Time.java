@@ -20,7 +20,7 @@ public class Time implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idtime")
+	@Column(name = "id")
 	private long id;
 	
 	@Column(name = "nome")
@@ -29,9 +29,17 @@ public class Time implements Serializable {
 	@Column(name = "gols")
 	private int gols;
 	
+	@Column(name = "pontos")
+	private long pontos;
+	
 	@Column(name = "partidas")
 	private int partidas;
 
+	@Column(name = "vitorias")
+	private int vitorias;
+	
+	@Column(name = "derrotas")
+	private int derrotas;
 
 	public long getId() {
 		return id;
@@ -64,4 +72,29 @@ public class Time implements Serializable {
 	public void setPartidas(int partidas) {
 		this.partidas = partidas;
 	}
+
+	public long getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(long pontos) {
+		this.pontos = pontos;
+	}
+
+	public int getVitorias() {
+		return vitorias;
+	}
+
+	public void setVitorias(int vitorias) {
+		this.vitorias = vitorias;
+	}
+
+	public int getDerrotas() {
+		return derrotas;
+	}
+
+	public void setDerrotas(int derrotas) {
+		this.derrotas = derrotas;
+	}
+	
 }
