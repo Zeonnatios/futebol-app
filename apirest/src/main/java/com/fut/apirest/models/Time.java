@@ -15,7 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "time")
+@Table(name = "TIME")
 public class Time implements Serializable {
 	
 	@Id

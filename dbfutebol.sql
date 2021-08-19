@@ -2,7 +2,7 @@ DROP DATABASE dbfutebol;
 CREATE DATABASE dbfutebol;
 USE dbfutebol;
 
-CREATE TABLE TIME (
+CREATE TABLE time (
 id INT NOT NULL AUTO_INCREMENT,
 nome VARCHAR(50) NOT NULL,
 gols INT NULL,
@@ -14,7 +14,7 @@ derrotas INT NULL,
 PRIMARY KEY (id)
 );
 
-CREATE TABLE PARTIDAS (
+CREATE TABLE partidas (
 id INT NOT NULL AUTO_INCREMENT,
 time_casa varchar(50) NULL,
 time_visitante varchar(50) NULL,

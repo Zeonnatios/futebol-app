@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "partidas")
+@Table(name = "time")
 public class Partidas implements Serializable{
 	
 	@Id
